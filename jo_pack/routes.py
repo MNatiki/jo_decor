@@ -1,6 +1,6 @@
-from flask import render_template, url_for, flash, redirect, request
-from jo_pack.forms import RegistrationForm, LoginForm
-from jo_pack.models import User
+from flask import render_template, url_for, flash, redirect, request, get_flashed_messages
+from jo_pack.forms import RegistrationForm, LoginForm, OrderForm
+from jo_pack.models import User, Orders
 from flask_bcrypt import Bcrypt
 from jo_pack import app, db, bcrypt
 from flask_login import login_user, current_user, logout_user, login_required
@@ -46,3 +46,65 @@ def login():
 def logout():
     logout_user()
     return redirect(url_for('home'))
+
+@app.route("/order", methods=['GET', 'POST'])
+def order():
+    form = OrderForm()
+    if form.validate_on_submit():
+        username = form.username.data
+        phone = form.phone.data
+        choice = form.choice.data
+        address = form.address.data
+        order_entry = Orders(username=username, phone=phone, choice=choice, address=address)
+        db.session.add(order_entry)
+        db.session.commit()
+        flash('Your order has been created!', 'success')
+        return redirect(url_for('home'))
+    return render_template('order.html', title='Order', form=form)
+
+@app.route("/notify", methods=['GET', 'POST'])
+@login_required
+def notify():
+    if current_user.email == 'nati@gmail.com':
+        form = OrderForm()
+        datas = Orders.query.all()
+
+        if request.method == 'POST':
+            if 'done' in request.form:
+                row_id = form.id.data
+                # Retrieve the instance using .first()
+                order = Orders.query.filter_by(id=row_id).first()
+
+                if order:
+                    db.session.delete(order)
+                    db.session.commit()
+                    flash('Nice Job', 'success')
+                    return redirect(url_for('notify'))
+                else:
+                    flash('Order not found', 'danger')
+            else:
+                flash('Invalid action', 'danger')
+        return render_template('notify.html', title='Notify', form=form, datas=datas)
+    else:
+        flash('Unauthorized', 'danger')
+    return redirect(url_for('home'))
+
+
+@app.route("/done", methods=['GET', 'POST'])
+def done():
+    form = OrderForm()
+    if form.validate_on_submit():
+        row_id = form.id.data
+        # Retrieve the instance using .first()
+        order = Orders.query.filter_by(id=row_id).first()
+        if order:
+            db.session.delete(order)
+            db.session.commit()
+            flash('Nice Job', 'success')
+            return redirect(url_for('notify'))
+        else:
+            flash('Order not found', 'danger')
+    else:
+        flash('Form validation failed', 'danger')
+
+    return render_template('notify.html', title='Done', form=form)

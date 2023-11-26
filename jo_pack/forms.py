@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, BooleanField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, IntegerField, TextAreaField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from jo_pack.models import User
 
@@ -31,3 +31,15 @@ class LoginForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired()])
     remember = BooleanField('Remember Me')
     submit = SubmitField('Login')
+
+class OrderForm(FlaskForm):
+    id = IntegerField('Phone')
+    username = StringField('Full Name', validators=[DataRequired(), Length(min=2, max=20)])
+    phone = IntegerField('Phone', validators=[DataRequired()])
+    address = StringField('Address')
+    choice = TextAreaField('What is your choice', validators=[DataRequired()])
+    submit = SubmitField('Order')
+
+
+
+
