@@ -1,0 +1,23 @@
+create database jo_decor;
+drop database jo_decor;
+use jo_decor;
+drop table orders;
+select * from user;
+select * from orders;
+CREATE TABLE user (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(20) NOT NULL UNIQUE,
+    email VARCHAR(120) NOT NULL UNIQUE,
+    image_file VARCHAR(20) NOT NULL DEFAULT 'default.jpg',
+    password VARCHAR(60) NOT NULL
+);
+
+CREATE TABLE orders (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(20) NOT NULL UNIQUE,
+    choice VARCHAR(1024) NOT NULL,
+    phone INT(10) NOT NULL UNIQUE,
+    address VARCHAR(1024) DEFAULT NULL
+);
+
+git clone https://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@github.com/MNatiki/jo_decor

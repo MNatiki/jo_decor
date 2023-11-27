@@ -30,6 +30,7 @@
 <link rel="stylesheet" href="static/assets/style.css">
 </head>
 <body>
+
 <div class="topbar animated fadeInLeftBig"></div>
 
 <!-- Header Starts -->
@@ -62,11 +63,17 @@
               </ul>
               <div class="navbar-collapse  collapse">
                 <ul class="nav navbar-nav navbar-right">
-                  <li><a class="nav-item nav-link" href="/notify">Order Notify</a></li>
+                  {% if current_user.is_authenticated %}
+                    {% if current_user.email == 'nati@gmail.com' %}
+                      <li><a class="nav-item nav-link" href="/notify">Order Notify</a></li>
+                    {% endif %}
+                    <li><a class="nav-item nav-link" href="{{ url_for('account') }}">Account</a></li>
+                    <li><a class="nav-item nav-link" href="/logout">Logout</a></li>
+                  {% else %}
+                    <li><a class="nav-item nav-link" href="/register">Register</a></li>
+                    <li><a class="nav-item nav-link" href="/login">Login</a></li>
+                  {% endif %}
                   <li><a class="nav-item nav-link" href="/order">Order</a></li>
-                  <li><a class="nav-item nav-link" href="/register">Register</a></li>
-                  <li><a class="nav-item nav-link" href="/login">Login</a></li>
-                  <li><a class="nav-item nav-link" href="/logout">Logout</a></li>
                 </ul>
               </div>
             </div>
@@ -79,6 +86,18 @@
       </div>
     </div>
 <!-- #Header Starts -->
+
+<div style="  margin-left: 25%;  width: 700px; margin-top: 150px;">
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">
+          {{ message }}
+        </div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+</div>
 
 <div id="home">
 <!-- Slider Starts -->
