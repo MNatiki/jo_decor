@@ -77,13 +77,6 @@ p{font-size:1em;line-height: 1.7em; margin-bottom: 1.7em;}
 
 
 
-
-
-
-
-
-
-
 /*contact*/
 .contactform textarea,.contactform input{width: 100%;padding:1em;border:1px solid #ccc;margin-bottom: 1em;border-radius: 0;outline: none;}
 /*contact*/
@@ -149,4 +142,40 @@ p{font-size:1em;line-height: 1.7em; margin-bottom: 1.7em;}
 	.grid.team div{margin: 0;padding: 0;}
 	figure.effect-chico figcaption {padding: 1.5em;}
 	.footer{margin-top: 2em;padding-bottom: 2em;}
+}
+
+
+
+
+/* Common styles for all screen sizes */
+
+/* Styles for screens with a maximum width of 1200px */
+@media (max-width: 1200px) {
+    .login-form {
+        margin-left: 10%;
+        width: 80%;
+        border: 20px solid azure;
+        margin-top: 5%;
+    }
+}
+
+/* Styles for screens with a maximum width of 900px */
+@media (max-width: 900px) {
+    .login-form {
+        margin-left: 5%;
+        width: 90%;
+        border: 10px solid azure;
+        margin-top: 5%;
+    }
+}
+
+/* Styles for screens with a maximum width of 767px */
+@media (max-width: 767px) {
+    .login-form {
+        margin-left: 2%;
+        width: 96%;
+        border: 5px solid azure;
+        margin-top: 5%;
+    }
+    /* Add more specific styles for smaller screens if needed */
 }

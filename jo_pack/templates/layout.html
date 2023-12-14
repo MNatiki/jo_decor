@@ -3,8 +3,8 @@
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='assets/style.css') }}">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
@@ -18,32 +18,43 @@
     {% endif %}
 </head>
 <body>
-    <header class="site-header">
-        <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top" style="background-color: rgb(27, 28, 29);">
-            <div class="container" style="background-color: rgb(27, 28, 29);">
-                <a class="navbar-brand" href="#home"><img src="static/images/logo.png" alt="logo"></a>
-                <div class="collapse navbar-collapse" id="navbarToggle">
-                    <div class="navbar-nav mr-auto">
-                        <a class="nav-item nav-link" href="{{ url_for('home') }}">Home</a>
-                        <!-- Add more navigation links as needed -->
-                    </div>
-                    <!-- Navbar Right Side -->
-                    <div class="navbar-nav">
-                      {% if current_user.is_authenticated %}
+  <header class="site-header">
+    <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top" style="background-color: rgb(27, 28, 29);">
+        <div class="container">
+            <a class="navbar-brand" href="#home"><img src="static/images/logo.png" alt="logo"></a>
+            
+            <!-- Navbar Toggler Button -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <!-- Collapsed Navbar Links -->
+            <div class="collapse navbar-collapse" id="navbarToggle">
+                <div class="navbar-nav mr-auto">
+                    <a class="nav-item nav-link" href="{{ url_for('home') }}">Home</a>
+                    <!-- Add more navigation links as needed -->
+                </div>
+
+                <!-- Navbar Right Side -->
+                <div class="navbar-nav">
+                    {% if current_user.is_authenticated %}
                         <a class="nav-item nav-link" href="{{ url_for('account') }}">
-                          <img class="rounded-circle account-img" src="{{ image_file }}" style="width: 40px; height: 40px;">
+                            <img class="rounded-circle account-img" src="{{ image_file }}" style="width: 40px; height: 40px;">
                         </a>
                         {% if current_user.email == 'nati@gmail.com' %}
-                          <a class="nav-item nav-link" href="/notify">Order Notify</a>
+                            <a class="nav-item nav-link" href="/notify">Order Notify</a>
                         {% endif %}
                         <a class="nav-item nav-link" href="/logout">Logout</a>
-                      {% else %}
+                    {% else %}
                         <a class="nav-item nav-link" href="{{ url_for('login') }}">Login</a>
                         <a class="nav-item nav-link" href="{{ url_for('register') }}">Register</a>
-                      {% endif %}
-                      <a class="nav-item nav-link" href="/order">Order</a>
-                    </div>
+                    {% endif %}
+                    <a class="nav-item nav-link" href="/order">Order</a>
                 </div>
+            </div>
+        </div>
+    </nav>
+</header>
             </div>
         </nav>
     </header>
