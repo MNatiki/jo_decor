@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, BooleanField, IntegerField, TextAreaField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
-from jo_pack.models import User
+from jo_pack.models import User, Orders
 from flask_wtf.file import FileField, FileAllowed
 from flask_login import current_user
 
@@ -41,6 +41,17 @@ class OrderForm(FlaskForm):
     address = StringField('Address')
     choice = TextAreaField('What is your choice', validators=[DataRequired()])
     submit = SubmitField('Order')
+
+    def validate_username(self, username):
+        user = Orders.query.filter_by(username=username.data).first()
+        if user:
+            raise ValidationError('That username is taken. Please choose a different one.')
+        
+    def validate_phone(self, phone):
+        user = Orders.query.filter_by(phone=phone.data).first()
+        if user:
+            raise ValidationError('That username is taken. Please choose a different one.')
+
 
 
 class UpdateAccountForm(FlaskForm):

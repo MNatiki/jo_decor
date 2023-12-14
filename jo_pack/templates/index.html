@@ -87,15 +87,15 @@
     </div>
 <!-- #Header Starts -->
 
-<div style="  margin-left: 25%;  width: 700px; margin-top: 150px;">
+<div class="responsive-container">
   {% with messages = get_flashed_messages(with_categories=true) %}
-    {% if messages %}
-      {% for category, message in messages %}
-        <div class="alert alert-{{ category }}">
-          {{ message }}
-        </div>
-      {% endfor %}
-    {% endif %}
+      {% if messages %}
+          {% for category, message in messages %}
+              <div class="alert alert-{{ category }}">
+                  {{ message }}
+              </div>
+          {% endfor %}
+      {% endif %}
   {% endwith %}
 </div>
 

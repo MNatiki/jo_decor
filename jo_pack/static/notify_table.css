@@ -6,17 +6,18 @@
 /*Main Data Table */
 .mainTable{
 	text-align: center;
-	margin-top: 5px;
 }
-#table{
-	margin: 5px auto;
-}
+
 table tr:not(:first-child){
 	cursor: pointer;
 	transition: all .25s ease-in-out;
 }
 table tr:not(:first-child):hover{
 	background-color: #ddd;
+}
+
+tbody {
+	margin-right: 35%;
 }
 
 table{

@@ -179,3 +179,21 @@ p{font-size:1em;line-height: 1.7em; margin-bottom: 1.7em;}
     }
     /* Add more specific styles for smaller screens if needed */
 }
+
+
+.responsive-container {
+    margin-top: 80px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 15px; /* Optional: Add padding for better spacing on small screens */
+}
+
+/* Media query for smaller screens */
+@media (max-width: 767px) {
+    .responsive-container {
+        margin-top: 80px; /* Adjust margin-top for smaller screens if needed */
+        max-width: 100%;
+    }
+}
+
